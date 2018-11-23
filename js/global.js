@@ -142,6 +142,20 @@ $(function(){
 	}, function() {
 		service_timer = setInterval(service_play, service_times)
 	});
+
+	$('.menus_list1 .title1').click(function(){
+		$(this).parents('.menus_list1').children('li').removeClass('current');
+		let curIdx = $(this).parent('li').index();
+		for(let i = 0; i <= curIdx; i++){
+			$(this).parents('.menus_list1').children('li').eq(i).addClass('current');
+		}
+	})
+	$('.menus_list2 .title2').click(function(){
+		$(this).parent('li').toggleClass('current');
+		$(this).next('.menus_list3').toggleClass('show');
+	})
+	
+
 })
 
 
@@ -190,14 +204,14 @@ Router.prototype.route = function(path, callback) {
 };
 Router.prototype.refresh = function() {
 	this.currentUrl = location.hash.slice(1) || '/';
-
+	let service_setTimeout;
 	if(this.currentUrl == '/service'){
-		setTimeout(function(){
-			$('.bottom_tool_wrap').addClass('hide');
-			$('.page_service .service_slide').addClass('show');
-		},5000)
+		service_setTimeout = setTimeout(function(){
+			$('.service_slide').addClass('show');
+		},3000)
 	}else{
-		$('.page_service .service_slide').removeClass('show')
+		clearTimeout(service_setTimeout);
+		$('.service_slide').removeClass('show')
 	}
 
 	this.routes[this.currentUrl]();
