@@ -156,6 +156,76 @@ $(function(){
 	})
 	
 
+	// 行业研究
+	let explore_width = 0;
+	$('.page_explore ul li').each(function(){
+		explore_width+=$(this).outerWidth(true);
+	})
+	$('.page_explore ul').width(explore_width);
+	let explore_wrapper = document.getElementById('explore_slider_wrapper');//获取wrapper
+	let explore_mouse = document.getElementById('explore_slider_mouse');//获取鼠标div
+	let explore_position = explore_wrapper.getBoundingClientRect();
+	let explore_eLeft = explore_position.left;//wrapper距离页面左边的距离
+	let explore_eWidth = explore_position.width;//wrapper的宽度
+	let explore_rule = explore_eWidth/2+explore_eLeft;//计算wrapper元素的中心点的x轴坐标
+	let explore_liTotal = explore_wrapper.getElementsByTagName('li').length;//获取li的个数
+	let explore_liWidth = explore_wrapper.getElementsByTagName('li')[0].offsetWidth;//获取li元素的宽度
+	let explore_eVolume = parseInt(explore_eWidth/explore_liWidth);//计算wrapper容积
+	let explore_currIndex=0;//当前滚动了几次
+	let explore_scroll = new BScroll(explore_wrapper, {
+		scrollY: false,
+		scrollX: true,
+		eventPassthrough: 'vertical',
+		snap: {
+			loop: false,
+			threshold: 0.5,
+			stepX: explore_liWidth
+		}
+	})
+	$(".page_explore ul li .img").click(function(e){
+		if(e.clientX<explore_rule){
+			explore_scroll.prev();
+		}else{
+			if(explore_liTotal-explore_eVolume>explore_currIndex){
+				explore_scroll.next();
+			}
+			explore_currIndex=explore_scroll.getCurrentPage().pageX;
+		}
+	})
+	$(".page_explore ul li .img").mousemove(function(e){
+		explore_mouse.style.transform = `matrix(1, 0, 0, 1, ${e.clientX-35}, ${e.clientY-35})`;
+		if(e.clientX<explore_rule){
+			explore_mouse.classList.add('explore_slider_rotate')
+		}else{
+			explore_mouse.classList.remove('explore_slider_rotate')
+		}
+	})
+	$(".page_explore ul li .img").mouseenter(function(e){
+		explore_mouse.classList.add('show')
+	})
+	$(".page_explore ul li .img").mouseleave(function(e){
+		explore_mouse.classList.remove('show')
+	})
+
+	// 行业动态
+	$('.industry_time_line .item').click(function(){
+		$(this).addClass('current').siblings().removeClass('current');
+		$('.industry_time_article').eq(Number($(this).attr('data-html'))).addClass('current').siblings().removeClass('current');
+	})
+	$('.industry_time_article').each(function(){
+		let industry_width = 0;
+		$(this).find('ul li').each(function(){
+			industry_width+=$(this).outerWidth(true);
+		})
+		$(this).find('ul').width(industry_width);
+	})
+	// let industry_scrollLeft = 0;
+	// $('.industry_time_article').on('mousewheel', function(event) {
+	// 	console.log(event.originalEvent.wheelDelta)
+	// 	industry_scrollLeft-=event.originalEvent.wheelDelta
+	// 	$('.industry_time_article').scrollLeft(industry_scrollLeft)
+	// })
+
 })
 
 
