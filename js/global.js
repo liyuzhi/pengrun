@@ -102,6 +102,39 @@ $(function(){
 	});
 
 
+	// 首页banner
+	let home_timer,
+		home_index = -1,
+		home_times = 8000,
+		home_slide_number = $('.home_banner_cont li').length-1;
+	home_timer = setInterval(home_play, home_times);
+	function home_set() {
+		$('.home_banner_bg li').eq(home_index).addClass('current').siblings().removeClass('current');
+		$('.home_banner_cont li').eq(home_index).addClass('current').siblings().removeClass('current');
+		$('.home_banner_dot .item').eq(home_index).addClass('current').siblings().removeClass('current');
+		$('.home_banner_dot .item').removeClass('pass');
+		for(let i = 0; i <= home_index; i++){
+			$('.home_banner_dot .item').eq(i).addClass('pass');
+		}
+	};
+	function home_play() {
+		home_index++;
+		if (home_index > home_slide_number) {
+			home_index = 0
+		}
+		home_set()
+	};
+	$('.home_banner_dot .item').click(function() {
+		home_index = $(this).index();
+		home_set()
+	});
+	$('.home_banner_dot .item').hover(function() {
+		clearInterval(home_timer)
+	}, function() {
+		home_timer = setInterval(home_play, home_times)
+	});
+
+
 	// 服务内容
 	let service_timer,
 		service_index = -1,
@@ -143,9 +176,9 @@ $(function(){
 		service_timer = setInterval(service_play, service_times)
 	});
 
-	$('.menus_list1 .title1').click(function(){
+	$('.menus_list1>li').click(function(){
 		$(this).parents('.menus_list1').children('li').removeClass('current');
-		let curIdx = $(this).parent('li').index();
+		let curIdx = $(this).index();
 		for(let i = 0; i <= curIdx; i++){
 			$(this).parents('.menus_list1').children('li').eq(i).addClass('current');
 		}
@@ -234,6 +267,9 @@ $(function(){
 	$('.return_page_service').click(function(){
 		$('.data_details').removeClass('show');
 		self.location.href="#/service";
+	})
+	$('.industry_time_article ul li .img,.page_explore li .btn').click(function(){
+		$('.article_details').addClass('show');
 	})
 
 
