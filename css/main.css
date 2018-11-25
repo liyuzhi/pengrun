@@ -2273,10 +2273,11 @@ body {
 	right: 0;
 	color: #fff;
 	font-size: 14px;
-	z-index: 9;
+	z-index: 0;
 }
 .body_page_contact .footer_copyright{
 	opacity: 1;
+	z-index: 9;
 }
 .special_trigger{
 	position: absolute;
