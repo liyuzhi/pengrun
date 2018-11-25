@@ -226,6 +226,17 @@ $(function(){
 	// 	$('.industry_time_article').scrollLeft(industry_scrollLeft)
 	// })
 
+	// 数据调研
+	$('.page_data ul li .img').click(function(){
+		$('.data_details').addClass('show');
+	})
+
+	$('.return_page_service').click(function(){
+		$('.data_details').removeClass('show');
+		self.location.href="#/service";
+	})
+
+
 })
 
 
