@@ -975,9 +975,13 @@ body {
 	height: 10px;
 	border: 2px solid #3267a0;
 }
-.yellow_theme .menus_list2>li .title2 .arrowPlus span, .service_slide_details .menus_list2>li .title2 .arrowPlus:before {
+.service_slide_details .menus_list2>li .title2 .arrowPlus:before {
+	border: 2px solid #3267a0;
+}
+.yellow_theme .menus_list2>li .title2 .arrowPlus:before {
 	border: 2px solid #aa7d0d;
 }
+
 .service_slide_details .menus_list2>li .title2 .arrowPlus span {
 	top: 0;
 	left: 0;
