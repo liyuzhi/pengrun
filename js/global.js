@@ -134,6 +134,15 @@ $(function(){
 		home_timer = setInterval(home_play, home_times)
 	});
 
+	// 团队介绍
+	$('.team_picture_img').hover(function(){
+		$('.team_intro_h1').text($(this).attr('data-h1'))
+		$('.team_intro_h2').text($(this).attr('data-h2'))
+		$('.team_intro_h3').text($(this).attr('data-h3'))
+		$('.team_intro_h4').text($(this).attr('data-h4'))
+	})
+
+
 
 	// 服务内容
 	let service_timer,

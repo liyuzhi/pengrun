@@ -2046,7 +2046,10 @@ body {
 	height: 89.14%;
 	z-index: 1;
 	background: url(../images/team_picture.jpg) no-repeat left bottom;
-	background-size: 100%;
+	background-size: 100% 100%;
+}
+.page_team .team_picture_img{
+	position: absolute;
 }
 .page_team map area{outline: none;}
 .team_blue_line1{
