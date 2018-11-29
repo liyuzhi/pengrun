@@ -23,7 +23,7 @@ $(function(){
 	// 合作伙伴事件
 	let cooperation_slide_number = $('.page_cooperation ul li').length-1,
 		cooperation_index = 0,
-		cooperation_times = 3000;
+		cooperation_times = 1000;
 	let cooperation_timer = setInterval(function(){
 		cooperation_index++;
 		if(cooperation_index > cooperation_slide_number){

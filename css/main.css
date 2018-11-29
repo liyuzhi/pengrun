@@ -563,6 +563,15 @@ body {
 }
 /*首页*/
 .page_home{}
+.page_home .blue_block{
+	position: absolute;
+	width: 21.3%;
+	height: 23.93%;
+	background: #043883;
+	right: 0;
+	top: 27.12%;
+	z-index: 1;
+}
 .page_home .white_block{
 	position: absolute;
 	width: 22.18%;
@@ -593,6 +602,7 @@ body {
 	background: rgba(255,254,253,0.13);
 }
 .page_home .ico_mouse{
+	display: block;
 	position: absolute;
 	width: 20px;
 	height: 49px;
@@ -1259,6 +1269,13 @@ body {
 	width: 100%;
 	cursor: pointer;
 	position: relative;
+	overflow: hidden;
+}
+.page_data ul li .img img{
+	transition: 0.5s;
+}
+.page_data ul li .img:hover img{
+	transform: scale(1.2,1.2);
 }
 .page_data ul li .img_wrap{
 	position: absolute;
@@ -2295,6 +2312,45 @@ body {
 .body_page_contact .footer_copyright{
 	opacity: 1;
 	z-index: 9;
+}
+.bottom__business-trigger span{
+	position: absolute;
+	left: -50px;
+	top: -0px;
+	display: block;
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	border: 1px solid #fdfbfb;
+	background-color: #fdfbfb;
+	-webkit-transition: -webkit-transform 0.4s cubic-bezier(.68,-.55,.265,1.55);
+	-moz-transition: -moz-transform 0.4s cubic-bezier(.68,-.55,.265,1.55);
+	transition: transform 0.4s cubic-bezier(.68,-.55,.265,1.55);
+	-webkit-animation: ripple 0.7s linear infinite;
+	animation: ripple 0.7s linear infinite
+}
+.bottom__business-trigger:hover span{
+	-webkit-transform: scale(1.5,1.5);
+	-moz-transform: scale(1.5,1.5);
+	-ms-transform: scale(1.5,1.5);
+	-o-transform: scale(1.5,1.5);
+	transform: scale(1.5,1.5);
+}
+@-webkit-keyframes ripple {
+	0% {
+		box-shadow: 0 0 0 0 rgba(253,251,251,.3),0 0 0 7px rgba(253,251,251,.3),0 0 0 14px rgba(253,251,251,.3),0 0 0 21px rgba(253,251,251,.3)
+	}
+	100% {
+		box-shadow: 0 0 0 7px rgba(253,251,251,.3),0 0 0 14px rgba(253,251,251,.3),0 0 0 21px rgba(253,251,251,.3),0 0 0 28px rgba(253,251,251,0)
+	}
+}
+@keyframes ripple {
+	0% {
+		box-shadow: 0 0 0 0 rgba(253,251,251,.3),0 0 0 7px rgba(253,251,251,.3),0 0 0 14px rgba(253,251,251,.3),0 0 0 21px rgba(253,251,251,.3)
+	}
+	100% {
+		box-shadow: 0 0 0 7px rgba(253,251,251,.3),0 0 0 14px rgba(253,251,251,.3),0 0 0 21px rgba(253,251,251,.3),0 0 0 28px rgba(253,251,251,0)
+	}
 }
 .special_trigger{
 	position: absolute;
