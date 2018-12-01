@@ -415,7 +415,7 @@ Router.prototype.refresh = function() {
 			if(Router.currentUrl == '/service'){
 				$('.service_slide').addClass('show');
 			}
-		},5000)
+		},4000)
 	}else{
 		clearTimeout(service_setTimeout);
 		$('.service_slide').removeClass('show')
