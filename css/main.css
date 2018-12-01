@@ -221,7 +221,7 @@ img{border:0}
 	z-index: 0;
 	background: #fff;
 	opacity: 0;
-	transition: opacity 0.5s;
+	transition: all 0.5s;
 }
 .details_popup_wrap.show{
 	opacity: 1;
@@ -341,9 +341,16 @@ body {
 	text-transform: uppercase;
 }
 .header .nav_item{margin-right: 70px;}
+.header .nav_item:last-child{margin-right: 0px;}
 @media screen and (max-width: 1920px) {
 	.header .nav_item{margin-right: 40px;}
-} 
+}
+@media screen and (max-width: 1620px) {
+	.header .nav_item{margin-right: 20px;}
+}
+@media screen and (max-width: 1420px) {
+	.header .nav_item{margin-right: 10px;}
+}
 /*.header .nav_item:last-child{}*/
 .header .nav_item a{
 	font-size: 18px;
@@ -1183,7 +1190,7 @@ body {
 	left: 0;
 	bottom: 20.21%;
 	z-index: 5;
-	transition: width 0.2s linear 0.2s;
+	transition: width 0.5s linear 0.2s;
 }
 .page_service.rsActiveSlide .service_init .service_blue_block{
 	width: 8.48%;
@@ -1197,7 +1204,7 @@ body {
 	/*right: 0;*/
 	bottom: 27.12%;
 	z-index: 5;
-	transition: width 0.2s linear 0.2s;
+	transition: width 0.5s linear 0.2s;
 }
 .page_service.rsActiveSlide .service_init .service_yellow_block{
 	width: 41.61%;
@@ -1244,7 +1251,7 @@ body {
 .page_service .service_init .left_wrap .title,.page_service .service_init ul{
 	margin-top: -100px;
 	opacity: 0;
-	transition: all 0.2s linear 0.2s;
+	transition: all 0.5s linear 0.2s;
 }
 .page_service.rsActiveSlide .service_init .left_wrap .title,.page_service.rsActiveSlide .service_init ul{
 	margin-top: 0;
