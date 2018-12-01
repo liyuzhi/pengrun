@@ -1,3 +1,4 @@
+@charset "utf-8";
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
 html{color:#000;overflow-y:scroll;overflow:-moz-scrollbars-vertical}
 body,button,input,select,textarea{font-size:12px;font-family:'思源黑体 CN',Helvetica;color: #333;}
@@ -565,12 +566,16 @@ body {
 .page_home{}
 .page_home .blue_block{
 	position: absolute;
-	width: 21.3%;
+	width: 0;
 	height: 23.93%;
 	background: #043883;
-	right: 0;
+	left: 78.7%;
 	top: 27.12%;
 	z-index: 1;
+	transition: width 0.2s linear 0.2s;
+}
+.page_home.rsActiveSlide .blue_block{
+	width: 21.3%;
 }
 .page_home .white_block{
 	position: absolute;
@@ -641,6 +646,14 @@ body {
 	position: absolute;
 	left: 13%;
 	top: 27.65%;
+	overflow: hidden;
+}
+.home_banner_cont li .content>div{
+	margin-top: -100px;
+	transition: all 1s;
+}
+.home_banner_cont li.current .content>div{
+	margin-top: 0;
 }
 .home_banner_cont .content h1{
 	font-size: 94px;
@@ -1163,22 +1176,31 @@ body {
 	z-index: 1;
 }
 .page_service .service_init .service_blue_block{
-	width: 8.48%;
+	width: 0;
 	height: 12.12%;
 	background: #043883;
 	position: absolute;
 	left: 0;
 	bottom: 20.21%;
 	z-index: 5;
+	transition: width 0.2s linear 0.2s;
+}
+.page_service.rsActiveSlide .service_init .service_blue_block{
+	width: 8.48%;
 }
 .page_service .service_init .service_yellow_block{
-	width: 41.61%;
+	width: 0;
 	height: 22.44%;
 	background: #ce9b20;
 	position: absolute;
-	right: 0;
+	left: 58.39%;
+	/*right: 0;*/
 	bottom: 27.12%;
 	z-index: 5;
+	transition: width 0.2s linear 0.2s;
+}
+.page_service.rsActiveSlide .service_init .service_yellow_block{
+	width: 41.61%;
 }
 .page_service .service_init .service_yellow_text{
 	position: absolute;
@@ -1218,6 +1240,15 @@ body {
 	left: 23.4%;
 	top: 28.19%;
 	z-index: 5;
+}
+.page_service .service_init .left_wrap .title,.page_service .service_init ul{
+	margin-top: -100px;
+	opacity: 0;
+	transition: all 0.2s linear 0.2s;
+}
+.page_service.rsActiveSlide .service_init .left_wrap .title,.page_service.rsActiveSlide .service_init ul{
+	margin-top: 0;
+	opacity: 1;
 }
 .page_service .service_init .left_wrap .title h1{
 	color: #333333;
@@ -1571,6 +1602,10 @@ body {
 	top: 11.7%;
 	width: 100%;
 	height: 8.51%;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
 }
 .page_develop .timeLine_block{
 	width: 9.53%;
@@ -1749,14 +1784,18 @@ body {
 	width: 100%;
 	-moz-user-select:none;
 	-webkit-user-select:none;
-	user-select:none; 
+	user-select:none;
+	cursor: move;
+	cursor: -webkit-grab;
+	cursor: grab;
+}
+.page_explore .explore_slider_wrapper.is_pointer_down{
+	cursor: -webkit-grabbing;
+	cursor: grabbing;
 }
 .page_explore .explore_slider_wrapper .img{
 	width: 100%;
 	height: 425px;
-}
-.page_explore .explore_slider_wrapper .img:hover{
-	cursor: none;
 }
 .page_explore ul{
 	/*width: 3388px;*/
@@ -1889,11 +1928,14 @@ body {
 	height: 50px;
 	line-height: 50px;
 	padding-left: 20px;
-	color: #feffff;
+	color: #c5c5c5;
 	font-size: 18px;
 	position: relative;
 	margin-bottom: 60px;
 	cursor: pointer;
+}
+.page_industry .industry_time_line .item.current{
+	color: #feffff;
 }
 .page_industry .industry_time_line .item:after{
 	content: "";
@@ -1914,7 +1956,6 @@ body {
 	left: 19.27%;
 	top: 14.14%;
 	width: 80.73%;
-	overflow-x: auto;
 	opacity: 0;
 	z-index: 1;
 	transition: opacity 0.5s;
@@ -1927,8 +1968,16 @@ body {
 	z-index: 10;
 }
 .page_industry .industry_time_article ul{
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	position: relative;
+}
+.page_industry .industry_time_article ul::-webkit-scrollbar {
+	display: none;
 }
 .page_industry .industry_time_article ul li{
+	display: inline-block;
 	width: 1205px;
 	padding-left: 45px;
 	position: relative;
@@ -2147,7 +2196,7 @@ body {
 	position: absolute;
 	z-index: 7;
 	width: 30.72%;
-	height: 100%;
+	/*height: 100%;*/
 	top: 15.42%;
 	/*top: 0;*/
 	/*overflow-y: auto;*/
@@ -2629,6 +2678,9 @@ body {
 	opacity: .11;
 	transition: all 1s ease-in-out;
 }
+
+.mCSB_scrollTools .mCSB_draggerContainer{display: none;}
+
 
 
 

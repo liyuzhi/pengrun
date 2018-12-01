@@ -35,14 +35,42 @@ $(function(){
 
 
 	// 发展历程事件
-	var myData = [
-		{name: '海门', value: [121.15, 31.89, 90]},
-		{name: '鄂尔多斯', value: [109.781327, 39.608266, 120]},
-		{name: '招远', value: [120.38, 37.35, 142]},
-		{name: '舟山', value: [122.207216, 29.985295, 123]}
-	]
+	var develop_data = [
+		{name: "海门", value: 9},
+		{name: "鄂尔多斯", value: 12},
+		{name: "招远", value: 12},
+		{name: "舟山", value: 12},
+		{name: "齐齐哈尔", value: 14},
+		{name: "盐城", value: 15},
+		{name: "赤峰", value: 16},
+		{name: "青岛", value: 18},
+	];
+	var develop_geoCoordMap = {
+		"海门":[121.15,31.89],
+	    "鄂尔多斯":[109.781327,39.608266],
+	    "招远":[120.38,37.35],
+	    "舟山":[122.207216,29.985295],
+	    "齐齐哈尔":[123.97,47.33],
+	    "盐城":[120.13,33.38],
+	    "赤峰":[118.87,42.28],
+	    "青岛":[120.33,36.07],
+	};
+
+	var develop_convertData = function (data) {
+		var res = [];
+		for (var i = 0; i < data.length; i++) {
+			var geoCoord = develop_geoCoordMap[data[i].name];
+			if (geoCoord) {
+				res.push({
+					name: data[i].name,
+					value: geoCoord.concat(data[i].value)
+				});
+			}
+		}
+		return res;
+	};
 	$.get('/js/map/json/china.json', function (chinaJson) {
-		echarts.registerMap('china', chinaJson); // 注册地图
+		echarts.registerMap('china', chinaJson);
 		var mapChart = echarts.init(document.getElementById('china_map'));
 		var option = {
 			geo: {
@@ -56,15 +84,30 @@ $(function(){
 						areaColor: '#bababa'
 					}
 				},
-				series: [
-					{
-						name: '发展历程',
-						type: 'scatter',
-						coordinateSystem: 'geo',
-						data: myData
+			},
+			series: [
+				{
+					type: 'scatter',
+					coordinateSystem: 'geo',
+					data: develop_convertData(develop_data),
+					symbolSize: 8,
+					label: {
+						normal: {
+							formatter: '{b}',
+							position: 'right',
+							show: false
+						},
+						emphasis: {
+						show: true
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: '#d70d1d'
+						}
 					}
-				]
-			}
+				}
+			]
 		}
 		mapChart.setOption(option);
 	})
@@ -107,6 +150,9 @@ $(function(){
 		home_index = -1,
 		home_times = 8000,
 		home_slide_number = $('.home_banner_cont li').length-1;
+		setTimeout(function(){
+			home_play()
+		},1500)
 	home_timer = setInterval(home_play, home_times);
 	function home_set() {
 		$('.home_banner_bg li').eq(home_index).addClass('current').siblings().removeClass('current');
@@ -128,11 +174,11 @@ $(function(){
 		home_index = $(this).index();
 		home_set()
 	});
-	$('.home_banner_dot .item').hover(function() {
-		clearInterval(home_timer)
-	}, function() {
-		home_timer = setInterval(home_play, home_times)
-	});
+	// $('.home_banner_dot .item').hover(function() {
+	// 	clearInterval(home_timer)
+	// }, function() {
+	// 	home_timer = setInterval(home_play, home_times)
+	// });
 
 	// 团队介绍
 	$('.team_picture_img').hover(function(){
@@ -224,49 +270,57 @@ $(function(){
 			stepX: explore_liWidth
 		}
 	})
-	$(".page_explore ul li .img").click(function(e){
-		if(e.clientX<explore_rule){
-			explore_scroll.prev();
-		}else{
-			if(explore_liTotal-explore_eVolume>explore_currIndex){
-				explore_scroll.next();
-			}
-			explore_currIndex=explore_scroll.getCurrentPage().pageX;
-		}
+	$(".page_explore ul").mousedown(function(){
+		$('.explore_slider_wrapper').addClass('is_pointer_down')
 	})
-	$(".page_explore ul li .img").mousemove(function(e){
-		explore_mouse.style.transform = `matrix(1, 0, 0, 1, ${e.clientX-35}, ${e.clientY-35})`;
-		if(e.clientX<explore_rule){
-			explore_mouse.classList.add('explore_slider_rotate')
-		}else{
-			explore_mouse.classList.remove('explore_slider_rotate')
-		}
+	$(".page_explore ul").mouseup(function(){
+		$('.explore_slider_wrapper').removeClass('is_pointer_down')
 	})
-	$(".page_explore ul li .img").mouseenter(function(e){
-		explore_mouse.classList.add('show')
-	})
-	$(".page_explore ul li .img").mouseleave(function(e){
-		explore_mouse.classList.remove('show')
-	})
+	// $(".page_explore ul li .img").click(function(e){
+	// 	if(e.clientX<explore_rule){
+	// 		explore_scroll.prev();
+	// 	}else{
+	// 		if(explore_liTotal-explore_eVolume>explore_currIndex){
+	// 			explore_scroll.next();
+	// 		}
+	// 		explore_currIndex=explore_scroll.getCurrentPage().pageX;
+	// 	}
+	// })
+	// $(".page_explore ul li .img").mousemove(function(e){
+	// 	explore_mouse.style.transform = `matrix(1, 0, 0, 1, ${e.clientX-35}, ${e.clientY-35})`;
+	// 	if(e.clientX<explore_rule){
+	// 		explore_mouse.classList.add('explore_slider_rotate')
+	// 	}else{
+	// 		explore_mouse.classList.remove('explore_slider_rotate')
+	// 	}
+	// })
+	// $(".page_explore ul li .img").mouseenter(function(e){
+	// 	explore_mouse.classList.add('show')
+	// })
+	// $(".page_explore ul li .img").mouseleave(function(e){
+	// 	explore_mouse.classList.remove('show')
+	// })
 
 	// 行业动态
 	$('.industry_time_line .item').click(function(){
 		$(this).addClass('current').siblings().removeClass('current');
-		$('.industry_time_article').eq(Number($(this).attr('data-html'))).addClass('current').siblings().removeClass('current');
+		$('.industry_time_article').eq($(this).index()).addClass('current').siblings().removeClass('current');
 	})
-	$('.industry_time_article').each(function(){
-		let industry_width = 0;
-		$(this).find('ul li').each(function(){
-			industry_width+=$(this).outerWidth(true);
-		})
-		$(this).find('ul').width(industry_width);
-	})
-	// let industry_scrollLeft = 0;
-	// $('.industry_time_article').on('mousewheel', function(event) {
-	// 	console.log(event.originalEvent.wheelDelta)
-	// 	industry_scrollLeft-=event.originalEvent.wheelDelta
-	// 	$('.industry_time_article').scrollLeft(industry_scrollLeft)
+	$('.industry_time_article ul').mCustomScrollbar({
+		horizontalScroll:true
+	});
+	// $('.industry_time_article').each(function(){
+	// 	let industry_width = 0;
+	// 	$(this).find('ul li').each(function(){
+	// 		industry_width+=$(this).outerWidth(true);
+	// 	})
+	// 	$(this).find('ul').width(industry_width);
 	// })
+
+	// $('.industry_time_article ul').mousewheel(function(event, delta) {
+	// 	this.scrollLeft -= (delta * 60);
+	// 	event.preventDefault();
+	// });
 
 	// 数据调研
 	$('.page_data ul li .img').click(function(){
@@ -333,7 +387,9 @@ Router.prototype.refresh = function() {
 	let service_setTimeout;
 	if(this.currentUrl == '/service'){
 		service_setTimeout = setTimeout(function(){
-			$('.service_slide').addClass('show');
+			if(Router.currentUrl == '/service'){
+				$('.service_slide').addClass('show');
+			}
 		},3000)
 	}else{
 		clearTimeout(service_setTimeout);
