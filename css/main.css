@@ -342,15 +342,6 @@ body {
 }
 .header .nav_item{margin-right: 70px;}
 .header .nav_item:last-child{margin-right: 0px;}
-@media screen and (max-width: 1920px) {
-	.header .nav_item{margin-right: 40px;}
-}
-@media screen and (max-width: 1620px) {
-	.header .nav_item{margin-right: 20px;}
-}
-@media screen and (max-width: 1420px) {
-	.header .nav_item{margin-right: 10px;}
-}
 /*.header .nav_item:last-child{}*/
 .header .nav_item a{
 	font-size: 18px;
@@ -586,9 +577,8 @@ body {
 }
 .page_home .white_block{
 	position: absolute;
-	width: 22.18%;
-	padding-top: 22.18%;
-	/*height: 426px;*/
+	width: 20%;
+	padding-top: 20%;
 	left: 49.47%;
 	bottom: 34.68%;
 	border: #ebe7e7 1px solid;
@@ -2692,6 +2682,51 @@ body {
 
 
 
+
+@media screen and (max-width: 1920px) {
+	.header .nav_item{margin-right: 40px;}
+}
+@media screen and (max-width: 1600px) {
+	.header .logo{max-width: 140px;}
+	.header .logo img{width: 140px;}
+	.header .nav_item{margin-right: 30px;}
+	.header .nav_item a{font-size: 16px;}
+	.home_banner_cont .content h1,.home_banner_cont .content h2{font-size: 70px;}
+	.home_banner_cont .content h3{font-size: 32px;}
+	.f-s-40{font-size: 30px;}
+}
+@media screen and (max-width: 1440px) {
+	.header .logo{max-width: 140px;}
+	.header .logo img{width: 140px;}
+	.header .nav_item{margin-right: 20px;}
+	.header .nav_item a{font-size: 16px;width: 66px;}
+	.home_banner_cont .content h1,.home_banner_cont .content h2{font-size: 60px;}
+	.home_banner_cont .content h3{font-size: 30px;}
+	.team_boss_intro h1{font-size: 28px;}
+	.team_boss_intro h2{font-size: 16px;}
+	.team_boss_intro p{font-size: 16px;line-height: 22px;}
+	.team_boss_intro ul li{font-size: 14px;}
+	.team_blue_line1{top: 28%;}
+}
+@media screen and (max-width: 1366px) {
+	.header .logo{max-width: 140px;}
+	.header .logo img{width: 140px;}
+	.header .nav_item{margin-right: 20px;}
+	.header .nav_item a{font-size: 16px;width: 66px;}
+	.home_banner_cont .content h1,.home_banner_cont .content h2{font-size: 50px;}
+	.home_banner_cont .content h3{font-size: 28px;}
+	.team_boss_intro h1{font-size: 28px;}
+	.team_boss_intro h2{font-size: 16px;}
+	.team_boss_intro p{font-size: 16px;line-height: 22px;}
+	.team_boss_intro ul li{font-size: 14px;}
+	.page_team .member_intro h1{font-size: 24px;}
+	.page_team .member_intro h2{font-size: 20px;}
+	.page_team .member_intro h3{font-size: 16px;}
+	.page_team .member_intro h4{font-size: 14px;}
+}
+@media screen and (max-width: 1280px) {
+	.header .logo{margin-left: 3%;margin-right: 3%;}
+}
 
 
 

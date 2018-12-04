@@ -9,15 +9,15 @@ $(function(){
 			if(navList[i] === Router.currentUrl){
 				if(delta < 0){
 					if(navList[i+1]){
-						window.location.href = '/#'+navList[i+1];
+						window.location.href = '#'+navList[i+1];
 					}else{
-						window.location.href = '/#'+navList[0];
+						window.location.href = '#'+navList[0];
 					}
 				}else{
 					if(navList[i-1]){
-						window.location.href = '/#'+navList[i-1];
+						window.location.href = '#'+navList[i-1];
 					}else{
-						window.location.href = '/#'+navList[navList.length-1];
+						window.location.href = '#'+navList[navList.length-1];
 					}
 				}
 			}
