@@ -44,21 +44,6 @@ $(function(){
 		$(".tools__phone_block").removeClass('open');  
 	});
 
-
-	// 合作伙伴事件
-	let cooperation_slide_number = $('.page_cooperation ul li').length-1,
-		cooperation_index = 0,
-		cooperation_times = 1000;
-	let cooperation_timer = setInterval(function(){
-		cooperation_index++;
-		if(cooperation_index > cooperation_slide_number){
-			cooperation_index = 0;
-		}
-		$(".page_cooperation ul li").eq(cooperation_index).addClass('current').siblings().removeClass('current');
-	}, cooperation_times);
-
-
-
 	// 发展历程事件
 	var develop_data = [
 		{name: "海门", value: 9},
@@ -359,16 +344,96 @@ $(function(){
 	$('.industry_time_article ul li .img,.page_explore li .btn').click(function(){
 		$('.article_details').addClass('show');
 	})
-
-
 })
+
+$.fn.countTo = function (options) {
+	options = options || {};
+	return $(this).each(function () {
+		// set options for current element
+		var settings = $.extend({}, $.fn.countTo.defaults, {
+			from:            $(this).data('from'),
+			to:              $(this).data('to'),
+			speed:           $(this).data('speed'),
+			refreshInterval: $(this).data('refresh-interval'),
+			decimals:        $(this).data('decimals')
+		}, options);
+		
+		// how many times to update the value, and how much to increment the value on each update
+		var loops = Math.ceil(settings.speed / settings.refreshInterval),
+			increment = (settings.to - settings.from) / loops;
+		
+		// references & variables that will change with each update
+		var self = this,
+			$self = $(this),
+			loopCount = 0,
+			value = settings.from,
+			data = $self.data('countTo') || {};
+		
+		$self.data('countTo', data);
+		
+		// if an existing interval can be found, clear it first
+		if (data.interval) {
+			clearInterval(data.interval);
+		}
+		data.interval = setInterval(updateTimer, settings.refreshInterval);
+		
+		// initialize the element with the starting value
+		render(value);
+		
+		function updateTimer() {
+			value += increment;
+			loopCount++;
+			
+			render(value);
+			
+			if (typeof(settings.onUpdate) == 'function') {
+				settings.onUpdate.call(self, value);
+			}
+			
+			if (loopCount >= loops) {
+				// remove the interval
+				$self.removeData('countTo');
+				clearInterval(data.interval);
+				value = settings.to;
+				
+				if (typeof(settings.onComplete) == 'function') {
+					settings.onComplete.call(self, value);
+				}
+			}
+		}
+		
+		function render(value) {
+			var formattedValue = settings.formatter.call(self, value, settings);
+			$self.html(formattedValue);
+		}
+	});
+};
+$.fn.countTo.defaults = {
+	from: 0,               // the number the element should start at
+	to: 0,                 // the number the element should end at
+	speed: 1000,           // how long it should take to count between the target numbers
+	refreshInterval: 100,  // how often the element should be updated
+	decimals: 0,           // the number of decimal places to show
+	formatter: formatter,  // handler for formatting the value before rendering
+	onUpdate: null,        // callback method for every time the element is updated
+	onComplete: null       // callback method for when the element finishes updating
+};
+function formatter(value, settings) {
+	return value.toFixed(settings.decimals);
+}
+function count(options) {
+	var $this = $(this);
+	options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+	$this.countTo(options);
+}
 
 
 let navList = [],
 	initialize = true,
 	doScroll = false,
 	screenWidth = $(window).width(),
-	screenHeigth = $(window).height();
+	screenHeigth = $(window).height(),
+	cooperation_slide_number = 0,cooperation_index = 0,cooperation_times = 1500,cooperation_timer = '';
 function pageFun(url){
 	$('body').removeClass().addClass('body_page_'+url.replace('/',''));
 	$('.main_bg .bg').removeAttr('style');
@@ -441,6 +506,17 @@ Router.route('/service', function() {
 Router.route('/develop', function() {
 	// console.log('发展历程')
 });
+Router.route('/scale', function() {
+	// console.log('彭润规模')
+	setTimeout(function(){
+		$('.scale_number').data('countToOptions', {
+			formatter: function (value, options) {
+				return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+			}
+		});
+		$('.scale_number').each(count);
+	},400)
+});
 Router.route('/industry', function() {
 	// console.log('行业动态')
 });
@@ -455,6 +531,18 @@ Router.route('/team', function() {
 });
 Router.route('/cooperation', function() {
 	// console.log('合作伙伴')
+	// 合作伙伴事件
+	clearInterval(cooperation_timer);
+	$(".page_cooperation ul li").removeClass('current');
+	cooperation_slide_number = $('.page_cooperation ul li').length-1;
+	cooperation_index = 0;
+	cooperation_timer = setInterval(function(){
+		if(cooperation_index > cooperation_slide_number){
+			cooperation_index = 0;
+		}
+		$(".page_cooperation ul li").eq(cooperation_index).addClass('current').siblings().removeClass('current');
+		cooperation_index++;
+	}, cooperation_times);
 });
 Router.route('/contact', function() {
 	// console.log('联系我们')
